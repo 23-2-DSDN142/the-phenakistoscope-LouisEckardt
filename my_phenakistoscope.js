@@ -6,7 +6,7 @@ function setup_pScope(pScope){
   pScope.draw_layer_boundaries(false);
   pScope.set_direction(CCW);
   pScope.set_slice_count(SLICE_COUNT);
-  pScope.load_image("Pea" , "gif");
+  pScope.load_image("Pea" , "gif", 4);
 
 }
 
@@ -14,20 +14,21 @@ function setup_layers(pScope){
 
   new PLayer(null, 220);  //lets us draw the whole circle background, ignoring the boundaries
 
-  var layer1 = new PLayer(Pea);
+  var layer1 = new PLayer(DrawPea);
   layer1.mode( SWIRL(4) );
   layer1.set_boundary( 200, 1000 );
 
-  var layer2 = new PLayer(squares);
-  layer2.mode( RING );
-  layer2.set_boundary( 0, 400 );
+  // var layer2 = new PLayer(squares);
+  // layer2.mode( RING );
+  // layer2.set_boundary( 0, 400 );
 }
 
-function Pea(x, y, animation, pScope){
-  scale(.9);
-  pScope.draw_image("Pea",x,y);
 
-  scale(animation.wave(2));
+function DrawPea(x, y, animation, pScope){
+  scale(.9);
+ pScope.draw_image("Pea",x,y);
+
+  //sscale(animation.wave(2));
 
   
   
