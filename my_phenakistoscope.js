@@ -5,18 +5,18 @@ function setup_pScope(pScope){
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false);
   pScope.set_direction(CCW);
-  pScope.set_slice_count(SLICE_COUNT);
-  pScope.load_image("Pea" , "gif", 4);
+  pScope.set_slice_count(6);
+  pScope.load_image_sequence("draw_pea" , "png", 6);
 
 }
 
 function setup_layers(pScope){
 
-  new PLayer(null, 220);  //lets us draw the whole circle background, ignoring the boundaries
+  new PLayer(null, 140);  //lets us draw the whole circle background, ignoring the boundaries
 
-  var layer1 = new PLayer(DrawPea);
-  layer1.mode( SWIRL(4) );
-  layer1.set_boundary( 200, 1000 );
+  var draw_peaSequence = new PLayer(draw_pea);
+  draw_peaSequence.mode( RING );
+  draw_peaSequence.set_boundary( 0, 1000 );
 
   // var layer2 = new PLayer(squares);
   // layer2.mode( RING );
@@ -24,9 +24,9 @@ function setup_layers(pScope){
 }
 
 
-function DrawPea(x, y, animation, pScope){
-  scale(.9);
- pScope.draw_image("Pea",x,y);
+function draw_pea(x, y, animation, pScope){
+  scale(1.5);
+ pScope.draw_image_from_sequence("draw_pea", x, -280, animation.frame); 
 
   //sscale(animation.wave(2));
 
