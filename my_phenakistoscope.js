@@ -1,36 +1,92 @@
-const SLICE_COUNT = 10;
+const SLICE_COUNT = 8;
 
 function setup_pScope(pScope){
   pScope.output_mode(ANIMATED_DISK);
   pScope.scale_for_screen(true);
-  pScope.draw_layer_boundaries(true);
+  pScope.draw_layer_boundaries(false);
   pScope.set_direction(CCW);
-  pScope.set_slice_count(SLICE_COUNT);
+  pScope.set_slice_count(12);
+
+  pScope.load_image_sequence("draw_pea" , "png", 6); // creating the sequence for the peas
+  pScope.load_image_sequence("draw_carrot" , "PNG", 2); // creating the sequence for the peas
+
 }
 
 function setup_layers(pScope){
 
-  new PLayer(null, 220);  //lets us draw the whole circle background, ignoring the boundaries
+  new PLayer(null, 245, 245, 170 );  //lets us draw the whole circle background, ignoring the boundaries
 
-  var layer1 = new PLayer(faces);
-  layer1.mode( SWIRL(5) );
-  layer1.set_boundary( 200, 1000 );
+  
+  var draw_peaSequence = new PLayer(draw_pea);
+  draw_peaSequence.mode( RING );
+  draw_peaSequence.set_boundary( 0, 1000 );
+
+  var draw_carrotSequence = new PLayer(draw_carrot);
+  draw_carrotSequence.mode(SWIRL(3));
+  draw_carrotSequence.set_boundary( 0, 1000 );
+
+  var backgroundDetail = new PLayer(dots);
+  backgroundDetail.mode(SWIRL(3));
+  backgroundDetail.set_boundary(620, 1000);
+
+  var outerRing = new PLayer(outsideRing);
+  outerRing.mode(RING);
+  outerRing.set_boundary(580, 530);
+
+  var outerRing = new PLayer(outsideRing2);
+  outerRing.mode(RING);
+  outerRing.set_boundary(900, 1000);
+
 
   var layer2 = new PLayer(squares);
-  layer2.mode( RING );
-  layer2.set_boundary( 0, 400 );
+   layer2.mode( RING );
+   layer2.set_boundary( 0, 400 );
+
+   //var centralCircle = new PLayer(centerCircle); // New layer for th circle
+  //centralCircle.mode(RING);
+  //centralCircle.set_boundary(450, 500); 
+
+
+
+
 }
 
-function faces(x, y, animation, pScope){
+//drawing the image from the sequence
+function draw_pea(x, y, animation, pScope){
+  scale(1);
+ pScope.draw_image_from_sequence("draw_pea", x, -700, animation.frame); 
+}
+
+function draw_carrot(x, y, animation, pScope){
+  scale(.3);
+ pScope.draw_image_from_sequence("draw_carrot", -400, -900, animation.frame); 
+}
+
+  function outsideRing (x,y,animation,pScope){
+    pScope.fill_background(80, 50, 0);
   
-  scale(animation.frame*2);
+}
+ 
+function outsideRing2 (x,y,animation,pScope){
+  pScope.fill_background(0, 90 ,120);
 
-  ellipse(0,0,50,50); // draw head
-  fill(30);
-  ellipse(-10,-10,10,10); //draw eye
-  ellipse(10,-10,10,10); // draw eye
-  arc(0,10,20,10,0,180); // draw mouth
+}
 
+
+//function centerCircle(x, y, animation, pScope) {
+  //let circleSize = 400;
+ // fill(0, 10, 0); 
+  //ellipse(x, y, circleSize, circleSize);
+//}
+//sscale(animation.wave(2));
+function dots(x,y,animation, pScope){
+  var event =100 * animation.frame;
+  var dotsSize = 30; 
+  noStroke()
+  fill(70, 25, 0);
+  ellipse(100, 900, dotsSize, );
+  
+  
 }
 
 function squares(x, y, animation, pScope){
@@ -40,10 +96,7 @@ function squares(x, y, animation, pScope){
   let backgroundArcStart = 270 - angleOffset;
   let backgroundArcEnd = 270 + angleOffset;
 
-  fill(66, 135, 245)
-  arc(x,y,800,800,backgroundArcStart,backgroundArcEnd); // draws "pizza slice" in the background
-
-  fill(255)
-  rect(-10,-300-animation.wave()*50,20,20) // .wave is a cosine wave btw
-
+ 
+ 
 }
+
