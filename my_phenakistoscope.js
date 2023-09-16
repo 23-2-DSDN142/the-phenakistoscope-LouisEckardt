@@ -16,7 +16,6 @@ function setup_layers(pScope){
 
   new PLayer(null, 245, 245, 170 );  //lets us draw the whole circle background, ignoring the boundaries
 
-  
   var draw_peaSequence = new PLayer(draw_pea);
   draw_peaSequence.mode( RING );
   draw_peaSequence.set_boundary( 0, 1000 );
@@ -45,10 +44,6 @@ function setup_layers(pScope){
    //var centralCircle = new PLayer(centerCircle); // New layer for th circle
   //centralCircle.mode(RING);
   //centralCircle.set_boundary(450, 500); 
-
-
-
-
 }
 
 //drawing the image from the sequence
@@ -71,8 +66,6 @@ function outsideRing2 (x,y,animation,pScope){
   pScope.fill_background(0, 90 ,120);
 
 }
-
-
 //function centerCircle(x, y, animation, pScope) {
   //let circleSize = 400;
  // fill(0, 10, 0); 
@@ -85,8 +78,6 @@ function dots(x,y,animation, pScope){
   noStroke()
   fill(70, 25, 0);
   ellipse(100, 900, dotsSize, );
-  
-  
 }
 
 function squares(x, y, animation, pScope){
@@ -95,8 +86,5 @@ function squares(x, y, animation, pScope){
   let angleOffset = (360 / SLICE_COUNT) / 2
   let backgroundArcStart = 270 - angleOffset;
   let backgroundArcEnd = 270 + angleOffset;
-
- 
- 
 }
 
